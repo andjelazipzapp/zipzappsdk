@@ -1,5 +1,38 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
+ext {
+    bintrayRepo = 'maven' // Name of the Bintray repo you created
+    bintrayName = 'com.otb.utility:preference' // Bintray package name
+
+    publishedGroupId = 'com.android.zipzappsdk' // Group ID of the SDK which will be added in implementation line of gradle
+    artifact = 'sdklibrary' // Artifact ID of the SDK which will be added in implementation line of gradle
+    libraryVersion = '0.0.1' // Version of the library you created in Bintray
+
+    libraryName = 'Sdk library' // It is generally the module name
+    libraryDescription = 'Zipzapp sdk' // Small description of the library
+
+    siteUrl = 'https://github.com/andjelazipzapp/zipzappsdk'
+    gitUrl = 'https://github.com/andjelazipzapp/zipzappsdk'
+
+    developerId = 'andjela'
+    developerName = 'Andjela Stojancevic'
+    developerEmail = 'andjela@zipzapp.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+    //Bintray Credentials
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    bintrayUsername = properties.getProperty('BINTRAY_USERNAME')
+    bintrayUserOrg = properties.getProperty('BINTRAY_ORG')
+    bintrayApiKey = properties.getProperty('BINTRAY_API_KEY')
+}
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -32,3 +65,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+apply from: 'bintray.script'
